@@ -1,0 +1,13 @@
+spool ibsown.log
+alter system set sec_case_sensitive_logon = FALSE scope=both sid='*';
+
+CREATE USER IBS IDENTIFIED BY IBS DEFAULT TABLESPACE T_USR TEMPORARY TABLESPACE TEMP;
+alter user ibs quota unlimited on t_usr;
+alter user ibs quota unlimited on i_usr;
+alter user ibs quota unlimited on t_dict;
+alter user ibs quota unlimited on i_dict;
+
+grant RESOURCE to IBS;
+grant CONNECT to IBS with admin option;
+
+spool off

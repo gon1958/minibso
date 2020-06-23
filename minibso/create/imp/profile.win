@@ -1,0 +1,23 @@
+# настройки ORACLE
+ORACLE_BASE=c:\\oracle
+ORACLE_HOME=$ORACLE_BASE\\ora10r2
+NLS_LANG=AMERICAN_AMERICA.CL8MSWIN1251
+
+# База данных в которую закачиваем информацию
+CONNECT_SYS="sys/manager@minibso as sysdba"
+IBS_TARGET=ibs/ibs@MINIBSO
+
+# Каталог в который складываем дампы и протоколы
+DATA_PATH=..\\..\\data\\
+
+
+#***************************************************************
+# misc auto assign 
+#***************************************************************
+PATH=`cygpath $ORACLE_HOME/bin`:$PATH
+
+export ORACLE_BASE ORACLE_HOME NLS_LANG PATH
+export CONNECT_SYS
+export IBS_TARGET
+export DATA_PATH
+export SHELL

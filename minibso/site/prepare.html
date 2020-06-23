@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title></title>
+
+<style type="text/css" media="all">
+@import url("./css/maven-base.css");
+@import url("./css/maven-theme.css");
+</style>
+<meta name="Date-Revision-yyyymmdd" content="20121009" />
+<meta http-equiv="Content-Language" content="ru" />
+<script src="do_title.js" type="text/javascript"></script>
+</head>
+
+<body class="composite">
+<div id="leftColumn">
+<div id="navcolumn">
+<h5>MinIbso</h5>
+<ul>
+<li><a href="index.html" title="Общие полжения">Основная идея</a></li>
+<li><a href="download.html" title="Раздача">Раздача</a></li>
+<li><a href="history.html" title="История">История</a></li>
+<li><a href="thanks.html" title="Благодарности (вопросы)">Благодарности (вопросы)</a></li>
+</ul>
+<h5>Описание</h5>
+<ul>
+<li><a href="common.html" title="Общие полжения">Общие положения</a></li>
+<li><strong>Подготовка</strong></li>
+<li><a href="datatransfer.html" title="Пренос данных">Пренос данных</a></li>
+<li><a href="matching.html" title="Согласование данных">Согласование данных</a></li>
+<li><a href="endnote.html" title="Полный цикл">Полный цикл</a></li>
+<li><a href="dataadd.html" title="Дополнение данных">Дополнение данных</a></li>
+</ul>
+</div>
+</div>
+<div id="bodyColumn">
+<div id="contentBox">
+<div class="section">
+<h2>Подготовка</h2>
+<h3> Экземпляр - заготовка<a name="Экземпляр - заготовка"></a>
+</h3>
+<p>Генерируем экземпляр базы данных. Чтобы не терять время при
+каждом изготовлении “КОПИИ” можно сделать бакап. Все скрипты для
+заготовки находятся в “minibso/create/sql”. Некоторые из них надо
+подправить. Контекст доступа и пароли к экземпляру “КОПИИ” необходимо
+прописать в eggbld1.bat и eggbld3.bat. В скрипте deftbs.txt исправьте
+описание стандартных табличных пространств IBSO и дополнительных REDO
+логов.</p>
+<p>Чтобы при импорте таблица занимала меньший размер, чем на
+“ОРИГИНАЛЕ” ее необходимо создать заранее. Для генерации описания таких таблиц служит скрипт
+gentab.sql. Он использует пакет DBMS_METADATA для извлечения из “ОРИГИНАЛА” определений 
+таблиц и индексов, имеющих объем более 100 мегабайт или состоящих более чем из 10
+экстентов или размещенных вне стандартных табличных пространств IBSO.
+Критерии выбора можно изменить в строках 9, 16. Строки 61-64 и 91-94 необходимо 
+переписать заново. В них задается пренос обектов в стандартные табличные пространства IBSO.</p>
+<p>Эта процедура выполняется так:</p>
+<p class="source">sh&gt;sqlplus ibs/"password"@”ОРИГИНАЛ” @gentab.sql</p>
+<p>В результате получаем два скрипта с описанием “негабаритных”
+таблиц . Один для создания tabgen.txt и, на всякий случай, для удаления
+tabdrop.txt.</p>
+<p>Теперь подготовленная информация загружается в заготовленный
+экземпляр Oracle. Запускаем eggbld1.bat. Затем копируем eggbld2.bat и
+eggbld3.bat в каталог технологического ядра (туда, где находиться
+FIRST9.BAT). Запускаем eggbld2.bat. Далее следует знакомый процесс
+генерации схем AUD и AUDM. </p>
+<h3> Скрипты общего назначения<a name="Скрипты общего назначения"></a> </h3>
+<p>Основной скрипт находится в minibso/create. Он вызывается: </p>
+<p class="source">sh&gt;./run.sh prep|exp|imp|union|all </p>
+<p>Параметр “all” служит для полного прогона всей процедуры
+создания “КОПИИ”. Но прежде необходимо проверить каждую стадию в
+отдельности. Поэтапное описание будет приведено далее. </p>
+<p>Кроме того в этом каталоге находятся скрипты:</p>
+<p>sh&gt;./testpf.sh - проверка параметров контекста на
+правильность. </p>
+<p>sh&gt;./del.sh data|logs|all - удаление промежуточных
+данных: дампов, протоколов, того и другого.</p>
+<p>sh&gt;./finderr.sh - поиск ошибок в протоколах и
+объединение их в три файла: ошибки экспорта finderr.exp, ошибки импорта
+finderr.imp, все ошибки finderr.all. В последнем объединяются протоколы
+экспорта и импорта с удаленными вторичными сообщениями.</p>
+<h3> Настройка параметров контекста<a name="Настройка параметров контекста"></a> </h3>
+<p>Параметры для экспорта из “ОРИГИНАЛА” находятся в каталоге
+minibso/exp. Файлы profile.lin и profile.win для Linux и Cygwin
+соответственно. Аналогично параметры для импорта в “КОПИЮ” находятся в
+minibso/imp. </p>
+</div>
+</div>
+</div>
+</body></html>

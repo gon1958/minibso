@@ -1,0 +1,23 @@
+# настройки ORACLE
+ORACLE_BASE=/u01/app/oracle
+ORACLE_HOME=$ORACLE_BASE/product/12.2.0/dbhome_1
+NLS_LANG=AMERICAN_AMERICA.UTF8
+
+# База данных в которую закачиваем информацию
+CONNECT_SYS="sys/manager@minibso as sysdba"
+IBS_TARGET=IBS/IBS@MINIBSO
+
+# Каталог в который складываем дампы и протоколы
+DATA_PATH=../../data/
+
+
+#***************************************************************
+# misc auto assign 
+#***************************************************************
+PATH=$ORACLE_HOME/bin:$PATH
+
+export ORACLE_BASE ORACLE_HOME NLS_LANG PATH
+export CONNECT_SYS
+export IBS_TARGET
+export DATA_PATH
+export SHELL

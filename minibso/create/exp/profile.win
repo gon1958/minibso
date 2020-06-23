@@ -1,0 +1,20 @@
+# настройки ORACLE
+ORACLE_BASE=c:\\oracle
+ORACLE_HOME=$ORACLE_BASE\\ora10r2
+NLS_LANG=AMERICAN_AMERICA.CL8MSWIN1251
+
+# База данных из которой забирем информацию
+IBS_SOURCE=ibs/password@ibs_source
+
+# Каталог в который складываем дампы и протоколы
+DATA_PATH=..\\..\\data\\
+
+#***************************************************************
+# misc auto assign 
+#***************************************************************
+PATH=`cygpath $ORACLE_HOME/bin`:$PATH
+
+export ORACLE_BASE ORACLE_HOME NLS_LANG PATH
+export IBS_SOURCE
+export DATA_PATH
+export SHELL

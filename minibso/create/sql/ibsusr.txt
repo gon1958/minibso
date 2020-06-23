@@ -1,0 +1,7 @@
+spool ibsusr.log
+
+insert into IBS.USERS (name, username, type, properties, date_lock, date_unlock, lock_status, created, user_created, os_domain, os_user, description, user_locked, userid)
+values ('Администратор IBS', 'IBS', 'U', '|CONTEXT|INIT_SESSION|OPEN_SESSION|OREPORT|SENIOR|', null, null, null, to_date('07-08-2002 14:15:01', 'dd-mm-yyyy hh24:mi:ss'), 'IBS', null, null, null, null, 110370022120);
+commit;
+	  
+spool off

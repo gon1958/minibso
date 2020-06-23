@@ -1,0 +1,14 @@
+SET PAGESIZE 0
+SET FEEDBACK OFF
+SPOOL remove.scr 
+
+SELECT 'DROP VIEW IBS.' || VIEW_NAME || ';' FROM USER_VIEWS
+	WHERE view_name like 'REDU\_%' ESCAPE '\';
+
+SPOOL OFF
+
+SET TERMOUT OFF
+@remove.scr
+
+
+EXIT
